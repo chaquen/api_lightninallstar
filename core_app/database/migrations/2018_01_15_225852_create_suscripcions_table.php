@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetalleEstudianteGruposTable extends Migration
+class CreateSuscripcionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class CreateDetalleEstudianteGruposTable extends Migration
      */
     public function up()
     {
-        Schema::create('detalle_estudiante_grupos', function (Blueprint $table) {
+        Schema::create('suscripcions', function (Blueprint $table) {
             $table->increments('id');
+            $table->string("correo");
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ class CreateDetalleEstudianteGruposTable extends Migration
      */
     public function down()
     {
-        Schema::drop('detalle_estudiante_grupos');
+        Schema::drop('suscripcions');
     }
 }

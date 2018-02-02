@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class login extends Model
+class Nivel extends Model
 {
     //
+    protected $fillable=['nombre_nivel'];
 }

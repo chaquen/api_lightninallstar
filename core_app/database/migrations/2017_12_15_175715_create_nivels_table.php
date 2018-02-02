@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLoginsTable extends Migration
+class CreateNivelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class CreateLoginsTable extends Migration
      */
     public function up()
     {
-        Schema::create('logins', function (Blueprint $table) {
+        Schema::create('nivels', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombre_nivel');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ class CreateLoginsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('logins');
+        Schema::drop('nivels');
     }
 }

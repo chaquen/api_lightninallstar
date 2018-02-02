@@ -156,6 +156,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+         /*PROVEEDOR PARA EXPORTAR A EXCEL*/
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        /*PROVEEDOR PARA TRADUCIR FECHAS*/
+        Jenssegers\Date\DateServiceProvider::class,
+
     ],
 
     /*
@@ -201,6 +206,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+       /*ALIAS PARA EXPORTAR A EXCEL*/
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        /*ALIAS PARA TRADICRI FECHAS*/
+        'Date'=>Jenssegers\Date\Date::class,
+
 
     ],
 

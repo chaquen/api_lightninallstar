@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetalleCobroEstudiantesTable extends Migration
+class CreateCobrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,12 @@ class CreateDetalleCobroEstudiantesTable extends Migration
      */
     public function up()
     {
-        Schema::create('detalle_cobro_estudiantes', function (Blueprint $table) {
+        Schema::create('cobros', function (Blueprint $table) {
             $table->increments('id');
+            $table->enum('tipo_cobro',['uniformes','mensualidad','pistas','eventos','otros']);
+            $table->string('nombre_cobro');            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +28,6 @@ class CreateDetalleCobroEstudiantesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('detalle_cobro_estudiantes');
+        Schema::drop('cobros');
     }
 }

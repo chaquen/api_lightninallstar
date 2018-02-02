@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Grupo;
+use App\Competencia;
 
-class   GrupoController extends Controller
+use App\Util;
+
+use DB;
+
+class CompetenciaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +22,9 @@ class   GrupoController extends Controller
     public function index()
     {
         //
-        $g=Grupo::where("deleted_at","=",NULL)->get();
-        return response()->json(["mensaje"=>"Grupos encontrados" ,"respuesta"=>true,"datos"=>$g]);
+        $com=Competencia::get();
+
+        return response()->json(["mensaje"=>"Competencias","datos"=>$com,"respuesta"=>true]);
     }
 
     /**
@@ -40,7 +45,15 @@ class   GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+         $datos=Util::decodificar_json($request->get("datos"));
+        
+           
+        $arr=(array)$datos["datos"];
+
+        Competencia::create($arr);
+        return response()->json(["mensaje"=>"Competencia registrada" ,"respuesta"=>true]);    
+            
     }
 
     /**
@@ -52,7 +65,9 @@ class   GrupoController extends Controller
     public function show($id)
     {
         //
-        //Grupo::where()->get();
+        $com=Competencia::where("id",$id)->get();
+
+        return response()->json(["mensaje"=>"Competencias","datos"=>$com,"respuesta"=>true]);
     }
 
     /**
@@ -76,6 +91,13 @@ class   GrupoController extends Controller
     public function update(Request $request, $id)
     {
         //
+         $datos=Util::decodificar_json($request->get("datos"));
+        
+           
+        $arr=(array)$datos["datos"];
+
+        Competencia::where("id",$id)->update($arr);
+        return response()->json(["mensaje"=>"Competencia actualizada" ,"respuesta"=>true]);    
     }
 
     /**
@@ -87,5 +109,19 @@ class   GrupoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function crear_video(Request $request){
+        $dd=json_decode($request->get("datos"));
+        
+        $d=DB::table("videos")->insert((array)$dd->datos);
+        echo json_encode(["mensaje"=>"VIDEO CREADO","respuesta"=>true]);
+    }
+
+    public function crear_comentario(Request $request){
+        $dd=json_decode($request->get("datos"));
+        
+        $d=DB::table("comentarios")->insert((array)$dd->datos);
+        echo json_encode(["mensaje"=>"COMENTARIOS REGISTRADO","respuesta"=>true]);
     }
 }

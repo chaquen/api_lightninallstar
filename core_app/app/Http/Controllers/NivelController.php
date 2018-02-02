@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Grupo;
-
-class   GrupoController extends Controller
+class NivelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +16,6 @@ class   GrupoController extends Controller
     public function index()
     {
         //
-        $g=Grupo::where("deleted_at","=",NULL)->get();
-        return response()->json(["mensaje"=>"Grupos encontrados" ,"respuesta"=>true,"datos"=>$g]);
     }
 
     /**
@@ -52,7 +48,6 @@ class   GrupoController extends Controller
     public function show($id)
     {
         //
-        //Grupo::where()->get();
     }
 
     /**

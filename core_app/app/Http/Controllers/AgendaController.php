@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Grupo;
+use App\Agenda;
 
-class   GrupoController extends Controller
+use App\Util;
+
+class AgendaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +20,6 @@ class   GrupoController extends Controller
     public function index()
     {
         //
-        $g=Grupo::where("deleted_at","=",NULL)->get();
-        return response()->json(["mensaje"=>"Grupos encontrados" ,"respuesta"=>true,"datos"=>$g]);
     }
 
     /**
@@ -41,6 +41,13 @@ class   GrupoController extends Controller
     public function store(Request $request)
     {
         //
+        //
+        $datos=Util::decodificar_json($request->get("datos"));
+        
+        $arr=(array)$datos["datos"];
+        //var_dump($arr);
+        Agenda::create($arr);
+        return response()->json(["mensaje"=>"Evento agendado" ,"respuesta"=>true]);    
     }
 
     /**
@@ -51,8 +58,10 @@ class   GrupoController extends Controller
      */
     public function show($id)
     {
-        //
-        //Grupo::where()->get();
+        
+        $id=explode("&",$id);
+        $ag=Agenda::where($id[0],"=",$id[1])->get();
+        return response()->json(["mensaje"=>"Evento consultado" ,"datos"=>$ag,"respuesta"=>true]);    
     }
 
     /**
@@ -76,6 +85,10 @@ class   GrupoController extends Controller
     public function update(Request $request, $id)
     {
         //
+          $datos=Util::decodificar_json($request->get("datos"));
+          $arr=(array)$datos["datos"];
+          $ag=Agenda::where("id","=",$id)->update($arr);
+          return response()->json(["mensaje"=>"Evento consultado" ,"respuesta"=>true]);    
     }
 
     /**
